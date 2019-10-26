@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="349f5eb3-df3d-41c3-b969-c982de92735c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Test/Face.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Test/Face.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Test/META-INF/Test.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Test/Main.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +69,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

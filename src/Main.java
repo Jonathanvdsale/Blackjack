@@ -1,14 +1,31 @@
+
 import java.util.Scanner;
 
 public class Main {
-
+    int userChoiceForAV;
+    static int aceValueforPlayer=0;
+    static int aceValueforDealer=0;
+    private static void ACEValueForPlayer(Card card){
+    Face face=card.getFace();
+    Scanner read=new Scanner(System.in);
+    if(face.getValue()==1)
+    {
+            System.out.println("You got an ACE. What value of ACE would you like to have, 1 or 11? ");
+            aceValueforPlayer+=read.nextInt();
+            aceValueforPlayer--;
+    }
+    }
+    private static void ACEValueForDealer(Card card){
+    Face face=card.getFace();
+    if(face.getValue()==1)
+            aceValueforDealer+=11;
+    }
     public static void main(String[] args) {
 
         // Declare Variables
         Scanner scanner = new Scanner(System.in);
         String nickname;
         String input;
-
         // Ask for name
         System.out.println("What is your name?");
         input = scanner.nextLine();
@@ -27,37 +44,58 @@ public class Main {
             boolean gameOver = false;
 
             // give cards to the player
-            player.addCard(deck.draw());
-            player.addCard(deck.draw());
+            
+            Card card=deck.draw();
+            ACEValueForPlayer(card);
+            player.addCard(card);
+            card=deck.draw();
+            ACEValueForPlayer(card);
+            player.addCard(card);
             System.out.println(player.getHandAsString());
-
             // give cards to the dealer
-            dealer.addCard(deck.draw());
-            dealer.addCard(deck.draw());
+            card=deck.draw();
+            ACEValueForDealer(card);
+            dealer.addCard(card);
+            card=deck.draw();
+            ACEValueForDealer(card);
+            dealer.addCard(card);
             System.out.println(dealer.getHandAsString());
-
+            if ((player.getHandSum()+aceValueforPlayer) == 21) {
+                        System.out.println("Blackjack! You won.");
+                        gameOver = true;
+                    }
+            else if ((dealer.getHandSum()+aceValueforDealer) == 21) {
+                        System.out.println("Blackjack! Dealer won.");
+                        gameOver = true;
+                    }
             // player's turn
             do {
                 System.out.println("Would you like to hit or stay? Please type 'Hit' or 'Stay'");
                 do {
                     input = scanner.nextLine();
                 } while (!input.equalsIgnoreCase("Hit") && !input.equalsIgnoreCase("Stay"));
-
+               
                 // Hit
                 if (input.equalsIgnoreCase("Hit")) {
-                    player.addCard(deck.draw());
+                    card=deck.draw();
+                    ACEValueForPlayer(card);
+                    player.addCard(card);
                     System.out.println(player.getNickname() + " drew a card.");
                     System.out.println();
                     System.out.println(player.getHandAsString());
-                    if (player.getHandSum() > 21) {
+                    if ((player.getHandSum()+aceValueforPlayer) == 21) {
+                        System.out.println("Blackjack! You won.");
+                        gameOver = true;
+                    }
+                    if ((player.getHandSum()+aceValueforPlayer) > 21) {
                         System.out.println(
-                                "BUST! You Hit and got a total of " + player.getHandSum() + ". Dealer wins!");
+                                "BUST! You Hit and got a total of " + (player.getHandSum()+aceValueforPlayer) + ". Dealer wins!");
                         gameOver = true;
                     }
                 }
                 // STAY
                 if (input.equalsIgnoreCase("stay")) {
-                    System.out.println("You have chosen to stay. Your hand: " + player.getHandSum());
+                    System.out.println("You have chosen to stay. Your hand: " + (player.getHandSum()+aceValueforPlayer));
                 }
 
             } while (input.equalsIgnoreCase("Hit") && !gameOver);
@@ -72,17 +110,17 @@ public class Main {
 
             while (!gameOver) {
 
-                if (dealer.getHandSum() <= 16) {
+                if ((dealer.getHandSum()+aceValueforDealer) <= 16) {
                     // DRAW CARD
                     dealer.addCard(deck.draw());
                     System.out.println(dealer.getNickname() + " drew another card");
                     System.out.println(dealer.getHandAsString());
-                    if (dealer.getHandSum() == 21) {
+                    if ((dealer.getHandSum()+aceValueforDealer) == 21) {
                         System.out.println("Blackjack! Dealer won.");
                         gameOver = true;
                     }
-                    if (dealer.getHandSum() > 21) {
-                        System.out.println("BUST! Dealer Hit and got a total of " + dealer.getHandSum() + ". "
+                    if ((dealer.getHandSum()+aceValueforDealer) > 21) {
+                        System.out.println("BUST! Dealer Hit and got a total of " + (dealer.getHandSum()+aceValueforDealer) + ". "
                                 + "Congrats! You win!");
                         gameOver = true;
                     }
@@ -91,8 +129,8 @@ public class Main {
                     // STAY
                     System.out.println("Dealer has chosen to stay!");
                     System.out.println();
-                    int totalDealerSum = dealer.getHandSum();
-                    int totalPlayerSum = player.getHandSum();
+                    int totalDealerSum = dealer.getHandSum()+aceValueforPlayer;
+                    int totalPlayerSum = player.getHandSum()+aceValueforDealer;
 
                     if (totalDealerSum > totalPlayerSum) {
                         System.out.println("Both players has decided to stay. The winner is " + dealer.getNickname()
@@ -118,5 +156,5 @@ public class Main {
         // tidy up
         scanner.close();
     }
-
+    
 }

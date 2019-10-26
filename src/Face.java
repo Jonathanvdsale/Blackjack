@@ -12,5 +12,5 @@ public enum Face {
     public int getValue() {
         return value;
     }
-
+    
 }
