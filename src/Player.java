@@ -1,3 +1,5 @@
+//TODO: Sub-class the player class into Dealer and Player Classes
+
 import java.util.ArrayList;
 
 public class Player {
