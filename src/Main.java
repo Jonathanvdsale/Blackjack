@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 
 public class Main {
-    
     //Allows player to choose between 1 or 11 for the value of ACE
     int userChoiceForAV;
     static int aceValueforPlayer=0;
@@ -11,11 +10,10 @@ public class Main {
     private static void ACEValueForPlayer(Card card){
     Face face=card.getFace();
     Scanner read=new Scanner(System.in);
-    if(face.getValue()==1)
-    {
-            System.out.println("You got an ACE. What value of ACE would you like to have, 1 or 11? ");
-            aceValueforPlayer+=read.nextInt();
-            aceValueforPlayer--;
+    if(face.getValue()==1){
+        System.out.println("You got an ACE. What value of ACE would you like to have, 1 or 11? ");
+        aceValueforPlayer+=read.nextInt();
+        aceValueforPlayer--;
     }
     }
     private static void ACEValueForDealer(Card card){
@@ -24,9 +22,8 @@ public class Main {
             aceValueforDealer+=11;
     }
     
-    
     public static void main(String[] args) {
-
+        
         // Declare Variables
         Scanner scanner = new Scanner(System.in);
         String nickname;
@@ -39,16 +36,15 @@ public class Main {
 
         // Start of Blackjack Game
         do {
-
             System.out.println("Welcome To Blackjack " + nickname);
-
+           
             // initialize players and cards
             Player player = new Player(nickname);
             Player dealer = new Player("Dealer");
             Deck deck = new Deck();
             deck.shuffle();
             boolean gameOver = false;
-
+            
             // give cards to the player
             Card card=deck.draw();
             ACEValueForPlayer(card);
@@ -57,6 +53,7 @@ public class Main {
             ACEValueForPlayer(card);
             player.addCard(card);
             System.out.println(player.getHandAsString());
+            
             // give cards to the dealer
             card=deck.draw();
             ACEValueForDealer(card);
@@ -99,7 +96,7 @@ public class Main {
                         gameOver = true;
                     }
                 }
-                // STAY
+                // Stay
                 if (input.equalsIgnoreCase("stay")) {
                     System.out.println("You have chosen to stay. Your hand: " + (player.getHandSum()+aceValueforPlayer));
                 }
@@ -115,7 +112,6 @@ public class Main {
             }
 
             while (!gameOver) {
-
                 if ((dealer.getHandSum()+aceValueforDealer) <= 16) {
                     // DRAW CARD
                     dealer.addCard(deck.draw());
@@ -130,7 +126,6 @@ public class Main {
                                 + "Congrats! You win!");
                         gameOver = true;
                     }
-
                 } else {
                     // STAY
                     System.out.println("Dealer has chosen to stay!");
