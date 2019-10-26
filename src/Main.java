@@ -1,7 +1,10 @@
 
 import java.util.Scanner;
 
+
 public class Main {
+    
+    //Allows player to choose between 1 or 11 for the value of ACE
     int userChoiceForAV;
     static int aceValueforPlayer=0;
     static int aceValueforDealer=0;
@@ -20,12 +23,15 @@ public class Main {
     if(face.getValue()==1)
             aceValueforDealer+=11;
     }
+    
+    
     public static void main(String[] args) {
 
         // Declare Variables
         Scanner scanner = new Scanner(System.in);
         String nickname;
         String input;
+       
         // Ask for name
         System.out.println("What is your name?");
         input = scanner.nextLine();
@@ -44,7 +50,6 @@ public class Main {
             boolean gameOver = false;
 
             // give cards to the player
-            
             Card card=deck.draw();
             ACEValueForPlayer(card);
             player.addCard(card);
@@ -68,6 +73,7 @@ public class Main {
                         System.out.println("Blackjack! Dealer won.");
                         gameOver = true;
                     }
+            
             // player's turn
             do {
                 System.out.println("Would you like to hit or stay? Please type 'Hit' or 'Stay'");
